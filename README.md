@@ -31,7 +31,7 @@ run the script at a terminal, passing each playlist url as an argument
 python xvpl-dl.py https://www.xvideos.com/favorite/52500297/casual https://www.xvideos.com/favorite/38755061/female_orgasm https://www.xvideos.com/favorite/37487709/123
 ```
 
-### note
+#### note
 
 - each playlist's videos will be downloaded into a directory named `<profile>-<playlist_name>` within the current working directory
 - you can provide a custom download location using the variable `custom_dl_dir` in `xvpl-dl.py`
