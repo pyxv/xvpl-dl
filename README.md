@@ -1,7 +1,7 @@
 # xvpl-dl
 an xvideos.com playlist downloader, utilises `youtube-dl` under the hood
 
-### features
+#### features
 
 - can download multiple playlists in one command
 - can be run repeatedly and won't download duplicate files
@@ -37,6 +37,3 @@ python xvpl-dl.py https://www.xvideos.com/favorite/52500297/casual https://www.x
 - you can provide a custom download location using the variable `custom_dl_dir` in `xvpl-dl.py`
 - video files are saved in the format `<video_name>-<id>.<ext>`
 - you can specify/amend [`youtube_dl options`](https://github.com/rg3/youtube-dl/blob/master/youtube_dl/YoutubeDL.py#L129-L279) in the `Playlist.download()` method
-
-## acknowledgement
-
