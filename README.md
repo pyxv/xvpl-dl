@@ -22,8 +22,8 @@ pip install -r requirements.txt
 run the script at a terminal, passing each playlist url as an argument
 ```sh
 python xvpl-dl.py \ 
-https://xvideos.com/favorite/31255131/amateur_bbc \ 
-https://xvideos.com/favorite/31255131/female_orgasm
+https://xvideos.com/favorite/31254807/amateur \ 
+https://www.xvideos.com/favorite/38755061/female_orgasm
 ```
 
 - each playlist's videos will be downloaded into a directory named `<profile>-<playlist_name>` within the current working directory
