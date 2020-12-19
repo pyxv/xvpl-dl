@@ -1,7 +1,7 @@
 # xvpl-dl
-an xvideos.com playlist downloader, using `youtube-dl` under the hood
+an xvideos.com playlist downloader, utilises `youtube-dl` under the hood
 
-features:
+### features
 
 - can download multiple playlists in one command
 - can be run repeatedly and won't download duplicate files
