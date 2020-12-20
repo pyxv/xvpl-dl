@@ -3,8 +3,9 @@ an xvideos.com playlist downloader, utilises `youtube-dl` and `beautifulsoup` un
 
 #### features
 
-- can download multiple playlists in one command
-- can be run repeatedly and won't download duplicate files
+- resume partial downloads
+- download multiple playlists in one command
+- idempotent - can be run repeatedly and will only download newly-added files
 - further customisation possible using `youtube_dl` options (see below)
 
 ## install
