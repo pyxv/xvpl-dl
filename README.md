@@ -1,5 +1,5 @@
 # xvpl-dl
-an xvideos.com playlist downloader, utilises `youtube-dl` under the hood
+an xvideos.com playlist downloader, utilises `youtube-dl` and `beautifulsoup` under the hood
 
 #### features
 
