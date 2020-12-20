@@ -4,9 +4,11 @@
 # (playlists always download into their own folder)
 custom_dl_dir = ''
 
-# prevents duplicates across playlist download folders
+# prevents duplicates across ALL playlist download folders
 # set to false if you want a full set of videos for each 
 # individual playlist, even if it means duplicates
+# note that duplicates within a playlist will always be prevented
+# (i.e. the script is idempotent and can be re-run without issue)
 dedupe_all = True
 
 ## end user vars ##
@@ -26,7 +28,7 @@ from bs4 import BeautifulSoup
 
 class Playlist:
     # html classes and attributes
-    pagination_class = 'pagination'
+    pagination_class = 'pagination '
     header_attrib = 'profile-title'
     dl_dir = os.curdir
 
@@ -60,15 +62,28 @@ class Playlist:
             ydl.download(self.videos)
 
     def total_pages(self):
-        pagination_block = self.soup.find(class_=self.pagination_class)
-        try:
-            return int(pagination_block.find(attrs={"class": "last-page"}).string)
-        except:
-            return len(pagination_block.find_all('li')) - 1
+        pagination_block = self.soup.find(attrs={"class": self.pagination_class})
+        try: # check for playlist with many pages first (i.e. pagination of pages)
+            total = int(pagination_block.find(attrs={"class": "last-page"}).string)
+        except: 
+            try: # then for a multi-page playlist (no pagination of pages)
+                total = len(pagination_block.find_all('li')) - 1
+                return total
+            except AttributeError: # handle single-page playlists (no pagination element)
+                total = 1
+                return total
+        else: 
+            return total
+
+
+
 
     def make_pl_name(self):
-        header = self.soup.find(id=self.header_attrib)
-        profile = header.find(attrs={"class": "name"}).string
+        header = self.soup.find(attrs={"id": self.header_attrib})
+        try:
+            profile = header.find(attrs={"class": "name"}).string
+        except:
+            profile = 'UNKONWN'
         last_path_fragment = urlparse(self.url).path.split('/')[-1]
         return (profile + '--' + last_path_fragment)
 
@@ -79,7 +94,7 @@ class Playlist:
             self.pages.append(page_url)
 
 class Page:
-    url_root = 'https://xvideos.com/'
+    url_root = 'https://xvideos.com/video'
 
     # html classes and attributes
     content_class = 'mozaique'
@@ -98,7 +113,7 @@ class Page:
         videos_block = self.soup.find(class_=self.content_class)
         video_elements = videos_block.find_all(attrs={self.id_attrib: True})
         for video in video_elements:
-            self.videos.append(self.url_root + 'video' + video.get(self.id_attrib) + '/')
+            self.videos.append(self.url_root + video.get(self.id_attrib) + '/')
 
 args = sys.argv
 
